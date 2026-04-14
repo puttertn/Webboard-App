@@ -52,12 +52,12 @@ function Header({ isLoggedIn, setIsLoggedIn }) {
                 </div>
               </>
             ) : (
-<button 
-  className="login-btn-header" 
-  onClick={() => navigate('/login')}
->
-  Log In
-</button>            )}
+              <button
+                className="login-btn-header"
+                onClick={() => navigate('/login')}
+              >
+                Log In
+              </button>)}
           </div>
         </>
       )}

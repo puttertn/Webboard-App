@@ -12,7 +12,6 @@ function Sidebar({ isLoggedIn }) {
       )}
 
       <Link to="/" className="nav-item">🏠 Home</Link>
-      <Link to="/popular" className="nav-item">🚀 Popular</Link>
       <Link to="/explore" className="nav-item">📈 Explore</Link>
 
       {isLoggedIn && (

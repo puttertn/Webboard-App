@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from './Header';
-import Sidebar from './Sidebar';
-import Feed from './Feed';
-import RightPanel from './RightPanel';
-import Login from './Login';
-import Register from './Register';
+import Header from './components/Header';
+import Sidebar from './components/Sidebar';
+import Feed from './components/Feed';
+import RightPanel from './components/RightPanel';
+import Login from './pages/Login';
+import Register from './pages/Register';
 import './App.css';
 
 function App() {
