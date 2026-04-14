@@ -1,53 +1,64 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 function Header({ isLoggedIn, setIsLoggedIn }) {
   const navigate = useNavigate();
-  const location = useLocation(); // This tells us which page we are on
+  const location = useLocation();
+  const [showNotis, setShowNotis] = useState(false);
+  const [showAccount, setShowAccount] = useState(false);
 
-  // Define which paths should have a "Minimal" header
   const isAuthPage = location.pathname === '/login' || location.pathname === '/register';
 
   return (
     <header className="navbar">
       <Link to="/" className="logo-text">Webboard</Link>
 
-      {/* Only show Search and Button if NOT on Login/Register pages */}
       {!isAuthPage && (
         <>
-          <div style={{ 
-            background: '#F0F2F5', 
-            borderRadius: '20px', 
-            padding: '0 15px', 
-            display: 'flex', 
-            alignItems: 'center', 
-            width: '400px', 
-            height: '40px' 
-          }}>
-            <span style={{ color: '#878a8c' }}>🔍</span>
-            <input 
-              type="text" 
-              style={{ border: 'none', background: 'transparent', outline: 'none', width: '100%', paddingLeft: '10px' }} 
-              placeholder="Search Webboard" 
-            />
+          <div className="search-container-header">
+            <span>🔍</span>
+            <input type="text" className="search-input-header" placeholder="Search Webboard" />
           </div>
 
-          <button 
-            className="login-btn" 
-            style={{ 
-              background: '#FF4500', 
-              color: 'white', 
-              border: 'none', 
-              padding: '8px 20px', 
-              borderRadius: '20px', 
-              fontWeight: '700', 
-              height: '40px',
-              cursor: 'pointer' 
-            }} 
-            onClick={() => isLoggedIn ? setIsLoggedIn(false) : navigate('/login')}
-          >
-            {isLoggedIn ? 'Log Out' : 'Log In'}
-          </button>
+          <div className="header-actions">
+            {isLoggedIn ? (
+              <>
+                {/* Notification Icon */}
+                <div className="icon-wrapper" onClick={() => { setShowNotis(!showNotis); setShowAccount(false); }}>
+                  <span className="header-icon">🔔</span>
+                  <span className="icon-badge">4</span>
+                  {showNotis && (
+                    <div className="header-dropdown">
+                      <p className="dropdown-title">Notifications</p>
+                      <div className="dropdown-item">Someone liked your post</div>
+                      <div className="dropdown-item">New comment on "Hybrid UI"</div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Account Icon */}
+                <div className="icon-wrapper" onClick={() => { setShowAccount(!showAccount); setShowNotis(false); }}>
+                  <div className="user-avatar-small">A</div>
+                  {showAccount && (
+                    <div className="header-dropdown">
+                      <div className="dropdown-item">⚙️ Settings</div>
+                      <div className="dropdown-item">👤 Profile</div>
+                      <div className="dropdown-divider"></div>
+                      <div className="dropdown-item logout-text" onClick={() => setIsLoggedIn(false)}>
+                        🚪 Log Out
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </>
+            ) : (
+<button 
+  className="login-btn-header" 
+  onClick={() => navigate('/login')}
+>
+  Log In
+</button>            )}
+          </div>
         </>
       )}
     </header>
